@@ -1,0 +1,11 @@
+.centerText{
+    text-align: center;
+}
+.customButton{
+    background-color: lightgrey;
+}
+.limited{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
