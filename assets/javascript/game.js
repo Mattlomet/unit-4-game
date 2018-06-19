@@ -1,23 +1,24 @@
-var lukeSkywalker = $("<img>")
-lukeSkywalker.attr("src", "assets/images/luke.jpg");
-
-var kenobi = $("<img>")
-kenobi.attr("src", "assets/images/kenobi.png");
-
-var kyloren = $("<img>")
-kyloren.attr("src", "assets/images/kyloren.png");
-
-var darthmaul = $("<img>")
-darthmaul.attr("src", "assets/images/darthmaul.png");
-
-var sidious = $("<img>")
-sidious.attr("src", "assets/images/sidious.png");
-
 
 $(document).ready(function () {
-  console.log($("#fighterOne"));
-  console.log($("#fighterOne")[0].firstChild)
 
+  var lukeSkywalker = $("<img>")
+  var kenobi = $("<img>")
+  var kyloren = $("<img>")
+  var darthmaul = $("<img>")
+  var sidious = $("<img>")
+
+  function createElements(name,link,value){
+    name.attr("src",link);
+    name.attr("id", value);
+    console.log(name);
+  }
+  createElements(lukeSkywalker, "assets/images/luke.png", 0);
+  createElements(kenobi, "assets/images/kenobi.png", 1);
+  createElements(kyloren, "assets/images/kyloren.png", 2);
+  createElements(darthmaul, "assets/images/darthmaul.png", 3);
+  createElements(sidious, "assets/images/sidious.png", 4);
+
+  
   var lukeObj = new StarWars("Luke SkyWalker", 225, 50, lukeSkywalker);
   var kylorenObj = new StarWars("Kylo Ren", 150, 25, kyloren);
   var kenobiObj = new StarWars("Kenobi", 250, 100, kenobi);
@@ -49,8 +50,22 @@ $(document).ready(function () {
     }
   });
 
-  $(".customButton").on("click",function(){
-    
-  })
+  $(".customButton").on("click", function () {
+    // use values to get full object and or somehow trace the image element back to its object then compare life and attack of two fighters
+  
+    var attacker;
+    var defender;
+    var attackerDiv = $("#fighterOne")[0].firstChild;
+    console.log(attackerDiv.attributes.id);
+
+    var attackerValue = attackerDiv.attributes.id;
+    console.log(attackerValue);
+    if (attackerValue ===  ) {
+      attacker = lukeObj;
+      console.log("hello")
+    }else{
+      console.log("failure")
+    }
+  });
 
 });;
