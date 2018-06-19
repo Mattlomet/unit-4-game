@@ -16,32 +16,19 @@ $(document).ready(function () {
   createElements(darthmaul, "assets/images/darthmaul.png", 3);
   createElements(sidious, "assets/images/sidious.png", 4);
 
-  var lukeObj = new StarWars("Luke SkyWalker", 225, 50, lukeSkywalker);
-  var kylorenObj = new StarWars("Kylo Ren", 150, 25, kyloren);
-  var kenobiObj = new StarWars("Kenobi", 250, 100, kenobi);
-  var darthmaulObj = new StarWars("Darth Maul", 150, 50, darthmaul);
-  var sidiousObj = new StarWars("Sidious", 100, 100, sidious);
+  var lukeObj = new StarWars("Luke SkyWalker", 225, 50, lukeSkywalker, 0);
+  var kenobiObj = new StarWars("Kenobi", 250, 100, kenobi, 1);
+  var kylorenObj = new StarWars("Kylo Ren", 150, 25, kyloren, 2);
+  var darthmaulObj = new StarWars("Darth Maul", 150, 50, darthmaul, 3);
+  var sidiousObj = new StarWars("Sidious", 100, 100, sidious, 4);
 
-  function StarWars(name, health, attack, imgObj) {
+  function StarWars(name, health, attack, imgObj,key) {
     this.name = name;
     this.health = health;
     this.attack = attack;
     this.imgObj = imgObj;
+    this.key = key;
   }
-
-
-  // function appendImages(character, number) {
-  //   var image = character.imgObj[0];
-  //   console.log(image);
-  //   $("#characterStage").append("<div class='containerlimited'>" + "<h1 class='row'>" + "Health: " + character.health + "</h1>" + "<h2 class='row'>" + "Attack: " + character.attack + "</h2>" + "<div id='+number+ class='row imageRow'>" + +"</div>" + "</div>");
-
-  // }
-  // appendImages(lukeObj, 1);
-  // appendImages(kylorenObj, 2);
-  // appendImages(kenobiObj, 3);
-  // appendImages(darthmaulObj, 4);
-  // appendImages(sidiousObj, 5);
-
   var objectArray = [lukeObj,kylorenObj,kenobiObj,darthmaulObj,sidiousObj]
   
   function appendImages(array) {
@@ -76,6 +63,8 @@ $(document).ready(function () {
   appendImages(objectArray);
 
   $(".limited").on("click", function (event) {
+    console.log(event.currentTarget)
+    event.currentTarget.classList.add("selected");
     if ($("#fighterOne")[0].firstChild === null) {
       $("#fighterOne").append(event.currentTarget);
     } else {
@@ -84,6 +73,7 @@ $(document).ready(function () {
   });
 
   $(".customButton").on("click", function () {
+   
     var intervalId;
 
     var attacker;
@@ -91,77 +81,55 @@ $(document).ready(function () {
     var attackerDiv = $("#fighterOne")[0].firstChild.id;
     var defenderDiv = $("#fighterTwo")[0].firstChild.id;
 
-    console.log(attackerDiv);
-
     if (attackerDiv == 0) {
       attacker = lukeObj;
       console.log("attacker luke")
     } else if (attackerDiv == 1) {
       attacker = kenobiObj
       console.log("attacker kenobi")
-
     } else if (attackerDiv == 2) {
       attacker = kylorenObj
       console.log("attacker kyloren")
-
     } else if (attackerDiv == 3) {
       attacker = darthmaulObj
       console.log("attacker darthmaul")
-
     } else if (attackerDiv == 4) {
       attacker = sidiousObj
       console.log("attacker sidios")
-
     }
+
     if (defenderDiv == 0) {
       defender = lukeObj;
       console.log("defender luke")
-
     } else if (defenderDiv == 1) {
       defender = kenobiObj
       console.log("defender kenobi")
-
     } else if (defenderDiv == 2) {
       defender = kylorenObj
       console.log("defender kyloren")
-
     } else if (defenderDiv == 3) {
       defender = darthmaulObj
       console.log("defender darthmaul")
-
     } else if (defenderDiv == 4) {
       defender = sidiousObj
       console.log("defender sidious")
-
     }
 
     function fightAttackerDefender() {
-
-
       attacker.health = ((attacker.health) -= (defender.attack));
       defender.heatlh = ((defender.health) -= (attacker.attack));
 
-      // console.log(attacker.health);
-      console.log(defender.health)
-      console.log(attacker.attack)
+      $(".selected")[0].firstChild.innerHTML = attacker.health;
+      $(".selected")[1].firstChild.innerHTML = defender.health
 
       if (attacker.health <= 0) {
-        console.log("attacker has lost");
+        alert("attacker has lost");
         clearInterval(intervalId);
       } else if (defender.health <= 0) {
-        console.log("defender has lost");
+        alert("defender has lost");
         clearInterval(intervalId);
-
       }
     }
-    // TODO: set interval on fightAttackDefender function
     intervalId = setInterval(fightAttackerDefender, 1000);
   });
-
-});;
-
-// TODO:
-// LOGIC -----
-// -use values to get full object and or somehow trace the image element back to its object then compare life and attack of two fighters
-// -display obj.health obj.attack and obj.img inside a containing div
-// - CHANGE HEALTH LIVE TIME ON SCREEN AN ALERT ON WIN AND LOSEGIT 
+});
