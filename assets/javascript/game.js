@@ -51,21 +51,38 @@ $(document).ready(function () {
   });
 
   $(".customButton").on("click", function () {
-    // use values to get full object and or somehow trace the image element back to its object then compare life and attack of two fighters
-  
+   
     var attacker;
     var defender;
-    var attackerDiv = $("#fighterOne")[0].firstChild;
-    console.log(attackerDiv.attributes.id);
+    var attackerDiv = $("#fighterOne")[0].firstChild.id;
+    var defenderDiv = $("#fighterTwo")[0].firstChild.id;
 
-    var attackerValue = attackerDiv.attributes.id;
-    console.log(attackerValue);
-    if (attackerValue ===  ) {
-      attacker = lukeObj;
-      console.log("hello")
+  
+
+    if (attackerDiv == 0|| defenderDiv == 0 ) {
+      if (attackerDiv== 0) {
+        attacker = lukeObj
+      } else {
+        defender = lukeObj
+      }
+      console.log(defender);
+      console.log("hello");
+      console.log(attacker);
     }else{
       console.log("failure")
     }
   });
 
 });;
+
+
+// TODO:
+  // FRONT END DEVELOPMENTS-----
+    // - stylings, health bar and attack bar
+
+// TODO:
+  // LOGIC -----
+    // -if statement in custom button click function
+    // - build logic behind (possibly) a "fight" function
+    // -logic behind winning and losing game. 
+    // -use values to get full object and or somehow trace the image element back to its object then compare life and attack of two fighters
